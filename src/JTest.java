@@ -37,7 +37,7 @@ public class JTest {
 	/**
 	 * StreamDataToCSV
 	 * Given we could be processing millions of record,
-	 * It only makes sense to stream the data in batches so as not to exhaust memory
+	 * It only makes sense to stream the data so as not to exhaust memory
 	 * We will fetch the data in pages and process until the last record
 	 * */
 	public void StreamDataToCSV(){
