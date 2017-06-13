@@ -1,0 +1,15 @@
+Assumptions:
+*Database and table assumed already created
+*Record set assumed to static and not changing
+*Solution has been built in Eclipse IDE
+*MySQL is used as the relational database manager
+*MySQL driver has been included in the project
+
+
+Solution:
+*Creating a class that connects to database
+*Streaming records and processing 
+*Writing processed record to file
+*
+*Closing file
+*Closing connection to database

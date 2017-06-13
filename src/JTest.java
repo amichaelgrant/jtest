@@ -1,25 +1,22 @@
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import com.mysql.jdbc.Statement;
 
 public class JTest {
 	
-	static final String DBURL 		= "jdbc:mysql://localhost/jtest?useSSL=false";
-	static final String DBUSER  	= "root";
-	static final String DBPASS  	= "admin";
+	static final String DBURL 	= "jdbc:mysql://localhost/jtest?useSSL=false";
+	static final String DBUSER  = "root";
+	static final String DBPASS  = "admin";
 	
-	Connection connection 			= null;
-	Statement stmt 					= null;
-	ResultSet rSet 					= null;
+	Connection connection 		= null;
+	Statement stmt 				= null;
+	ResultSet rSet 				= null;
 	
-	int FetchSize 					= 1000;
-	static final String CsvFilePath = "/tmp/data.csv";
+	int FetchSize 				= 1000;
+	static final String FILEPATH= "/tmp/data.csv";
 	
 	/**
 	 * JTest
@@ -48,7 +45,7 @@ public class JTest {
 		 * Open output file stream */
 		FileWriter ostream = null;
 		try{
-			ostream = new FileWriter(CsvFilePath);
+			ostream = new FileWriter(FILEPATH);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -57,8 +54,8 @@ public class JTest {
 		 * Starting reading records from table*/
 		try{
 			String line  = null;
-			String sqlString = "SELECT * FROM location WHERE timestamp > '2017-05-01 00:00:00' and timestamp < '2017-05-01 23:59:59'";
-			PreparedStatement pstmt = connection.prepareStatement(sqlString);
+			String sqlQuery = "SELECT * FROM location WHERE timestamp > '2017-05-01 00:00:00' and timestamp < '2017-05-01 23:59:59'";
+			PreparedStatement pstmt = connection.prepareStatement(sqlQuery);
 			pstmt.setFetchSize(FetchSize);
 			rSet = pstmt.executeQuery();
 			
@@ -88,12 +85,15 @@ public class JTest {
 		try{
 			if(ostream != null)
 				ostream.close();
+			if(rSet != null)
+				rSet.close();
 			if(connection != null)
 				connection.close();
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
 	}
+	
 	
 	public static void main(String[] args){
 		System.out.println("Java test app");
